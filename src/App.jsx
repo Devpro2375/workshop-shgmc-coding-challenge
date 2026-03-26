@@ -1,12 +1,13 @@
 import React, { useState, useCallback, useRef } from 'react';
 import confetti from 'canvas-confetti';
-import { modules } from './data/challenges';
+import { levels } from './data/challenges';
 import Sidebar from './components/Sidebar';
 import CodeEditor from './components/CodeEditor';
 import OutputPreview from './components/OutputPreview';
 import './App.css';
 
 function App() {
+  const [activeLevel, setActiveLevel] = useState('beginner');
   const [activeModule, setActiveModule] = useState('html');
   const [activeChallenge, setActiveChallenge] = useState(0);
   const [completedChallenges, setCompletedChallenges] = useState([]);
@@ -24,8 +25,15 @@ function App() {
     document.documentElement.setAttribute('data-theme', next);
   };
 
+  const modules = levels[activeLevel];
   const currentModule = modules.find(m => m.id === activeModule);
   const challenge = currentModule?.challenges[activeChallenge];
+
+  const handleLevelChange = (level) => {
+    setActiveLevel(level);
+    setActiveChallenge(0);
+    setActiveModule('html');
+  };
 
   // Initialize code when challenge changes
   React.useEffect(() => {
@@ -37,7 +45,7 @@ function App() {
       setShowSuccess(false);
       setChallengeKey(k => k + 1);
     }
-  }, [activeModule, activeChallenge]);
+  }, [activeModule, activeChallenge, activeLevel]);
 
   const handleRun = useCallback(() => {
     if (window.__runCode) {
@@ -100,6 +108,8 @@ function App() {
         activeChallenge={activeChallenge}
         setActiveChallenge={setActiveChallenge}
         completedChallenges={completedChallenges}
+        activeLevel={activeLevel}
+        setActiveLevel={handleLevelChange}
       />
 
       <div className="main-content">

@@ -1,0 +1,153 @@
+export const htmlIntermediate = [
+  { id:'hi-1', title:'Semantic Layout', difficulty:'Medium', description:'Build a full page layout using semantic HTML5: header with nav, main with sections, aside, and footer.',
+    concepts:['Semantic HTML','<section>','<aside>'],
+    starterCode:`<!-- Build: header>nav, main>section+aside, footer -->\n\n`,
+    solution:`<header>\n  <nav><a href="#">Home</a> <a href="#">About</a></nav>\n</header>\n<main>\n  <section>\n    <h1>Welcome</h1>\n    <p>Main content here</p>\n  </section>\n  <aside>\n    <h2>Sidebar</h2>\n    <p>Related links</p>\n  </aside>\n</main>\n<footer><p>&copy; 2026</p></footer>`,
+    explanation:`📌 <section> groups related content with its own heading.\n📌 <aside> is for sidebar/related content (not the main topic).\n📌 <nav> wraps navigation links specifically.\n📌 Semantic tags help SEO and screen readers understand your page structure.`,
+    hints:['<section> is for grouping related content','<aside> is for sidebar content','<nav> wraps your main navigation links'],
+    validate:c=>['<section>','<aside>','<nav>','<header>','<footer>'].every(t=>c.includes(t))
+  },
+  { id:'hi-2', title:'Responsive Images', difficulty:'Medium', description:'Use <picture> with <source> to serve different images at different screen sizes. Add loading="lazy" for performance.',
+    concepts:['<picture>','srcset','lazy loading'],
+    starterCode:`<!-- Use <picture> with 2 sources for different widths + img fallback with lazy loading -->\n\n`,
+    solution:`<picture>\n  <source media="(min-width: 800px)" srcset="https://picsum.photos/800/400">\n  <source media="(min-width: 400px)" srcset="https://picsum.photos/400/200">\n  <img src="https://picsum.photos/200/100" alt="Responsive demo" loading="lazy">\n</picture>`,
+    explanation:`📌 <picture> lets you serve different images for different screen sizes.\n📌 <source media="(min-width:800px)"> activates on screens 800px or wider.\n📌 Browser picks the FIRST matching source, falls back to <img>.\n📌 loading="lazy" delays loading until the image is near the viewport — saves bandwidth!`,
+    hints:['<picture> wraps <source> and <img>','media attribute sets the screen size condition','loading="lazy" improves performance'],
+    validate:c=>['<picture>','<source','srcset','loading="lazy"'].every(t=>c.includes(t))
+  },
+  { id:'hi-3', title:'Advanced Forms', difficulty:'Medium', description:'Create a registration form with email validation, required fields, select dropdown, radio buttons, and fieldset grouping.',
+    concepts:['<fieldset>','<select>','required','radio buttons'],
+    starterCode:`<form>\n  <!-- Name (required), Email (required), Gender (radio M/F), Country (select dropdown), Submit -->\n  \n</form>`,
+    solution:`<form>\n  <fieldset>\n    <legend>Registration</legend>\n    <label>Name: <input type="text" required></label><br>\n    <label>Email: <input type="email" required></label><br>\n    <label><input type="radio" name="gender" value="M"> Male</label>\n    <label><input type="radio" name="gender" value="F"> Female</label><br>\n    <select>\n      <option>India</option>\n      <option>USA</option>\n      <option>UK</option>\n    </select><br>\n    <button type="submit">Register</button>\n  </fieldset>\n</form>`,
+    explanation:`📌 <fieldset> groups related form fields, <legend> gives it a title.\n📌 required attribute prevents form submission if empty.\n📌 Radio buttons with the same name="gender" form a group — only one can be selected.\n📌 <select> creates a dropdown menu with <option> items.`,
+    hints:['<fieldset> and <legend> group form sections','required prevents empty submissions','Radio buttons need the same name to be a group'],
+    validate:c=>['<fieldset>','required','type="radio"','<select>'].every(t=>c.includes(t))
+  },
+  { id:'hi-4', title:'Dialog & Details', difficulty:'Medium', description:'Use native HTML elements <dialog> for modals and <details>/<summary> for collapsible content — zero JavaScript needed!',
+    concepts:['<dialog>','<details>','<summary>'],
+    starterCode:`<!-- Create a <details> FAQ section AND a <dialog> modal with open/close buttons -->\n\n`,
+    solution:`<details>\n  <summary>What is HTML5?</summary>\n  <p>HTML5 is the latest version with semantic elements and new APIs.</p>\n</details>\n<details>\n  <summary>Why semantic HTML?</summary>\n  <p>It helps search engines and screen readers understand your page.</p>\n</details>\n\n<button onclick="document.getElementById('d').showModal()">Open Modal</button>\n<dialog id="d">\n  <h2>Hello!</h2>\n  <p>This is a native modal.</p>\n  <button onclick="this.closest('dialog').close()">Close</button>\n</dialog>`,
+    explanation:`📌 <details> creates collapsible content — click <summary> to toggle.\n📌 No CSS or JS needed — it's built into the browser!\n📌 <dialog> is a native modal — .showModal() opens it, .close() closes it.\n📌 These reduce dependency on JavaScript libraries for common UI patterns.`,
+    hints:['<details> + <summary> = collapsible section','<dialog> is a native modal element','.showModal() opens the dialog'],
+    validate:c=>['<details>','<summary>','<dialog'].every(t=>c.includes(t))
+  },
+  { id:'hi-5', title:'Accessibility Basics', difficulty:'Medium', description:'Add ARIA labels, roles, and proper alt text to make a navigation accessible for screen readers.',
+    concepts:['aria-label','role','tabindex'],
+    starterCode:`<!-- Make this nav accessible with aria-label, role, tabindex -->\n<nav>\n  <ul>\n    <li><a href="#">Home</a></li>\n    <li><a href="#">About</a></li>\n    <li><a href="#">Contact</a></li>\n  </ul>\n</nav>`,
+    solution:`<nav aria-label="Main Navigation" role="navigation">\n  <ul role="menubar">\n    <li role="none"><a href="#" role="menuitem" tabindex="0">Home</a></li>\n    <li role="none"><a href="#" role="menuitem" tabindex="0">About</a></li>\n    <li role="none"><a href="#" role="menuitem" tabindex="0">Contact</a></li>\n  </ul>\n</nav>`,
+    explanation:`📌 aria-label="Main Navigation" tells screen readers what this nav is for.\n📌 role="menubar" and "menuitem" define the menu structure for assistive tech.\n📌 tabindex="0" makes elements keyboard-focusable (Tab key navigation).\n📌 Accessibility helps ~15% of users who rely on screen readers or keyboard navigation.`,
+    hints:['aria-label describes the purpose','role tells assistive tech what the element does','tabindex="0" enables keyboard focus'],
+    validate:c=>['aria-label','role=','tabindex'].every(t=>c.includes(t))
+  },
+  { id:'hi-6', title:'Meta & Open Graph', difficulty:'Medium', description:'Add SEO meta tags and Open Graph tags for social media sharing previews.',
+    concepts:['viewport','description','og:title'],
+    starterCode:`<head>\n  <meta charset="UTF-8">\n  <!-- Add: viewport, description, og:title, og:description, og:image -->\n  <title>My Site</title>\n</head>`,
+    solution:`<head>\n  <meta charset="UTF-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n  <meta name="description" content="A modern website for 2026">\n  <meta property="og:title" content="My Site">\n  <meta property="og:description" content="A modern website for 2026">\n  <meta property="og:image" content="https://picsum.photos/1200/630">\n  <title>My Site</title>\n</head>`,
+    explanation:`📌 viewport meta is ESSENTIAL for mobile — without it, pages look tiny on phones.\n📌 name="description" appears in Google search results below your title.\n📌 og:title and og:description control how your link looks when shared on WhatsApp/Facebook.\n📌 og:image sets the preview image for social sharing cards.`,
+    hints:['viewport controls mobile display','description appears in search results','og: tags control social media previews'],
+    validate:c=>['viewport','description','og:title','og:image'].every(t=>c.includes(t))
+  }
+];
+
+export const cssIntermediate = [
+  { id:'ci-1', title:'Flexbox Nav Layout', difficulty:'Medium', description:'Create a responsive navbar with logo on left, links centered, and a button on right using Flexbox.',
+    concepts:['flex','space-between','align-items'],
+    starterCode:`<style>\n  .nav { display:flex; background:#1a1a2e; padding:1rem; color:white; /* align items center, space-between */ }\n  .nav .logo { font-weight:bold; font-size:1.2rem; }\n  .nav .links { display:flex; gap:1rem; /* center these */ }\n  .nav .links a { color:white; text-decoration:none; }\n  .nav .cta { background:#6c63ff; border:none; color:white; padding:0.5rem 1rem; border-radius:6px; cursor:pointer; }\n</style>\n<nav class="nav">\n  <div class="logo">MyApp</div>\n  <div class="links"><a href="#">Home</a><a href="#">About</a><a href="#">Blog</a></div>\n  <button class="cta">Sign Up</button>\n</nav>`,
+    solution:`<style>\n  .nav { display:flex; align-items:center; justify-content:space-between; background:#1a1a2e; padding:1rem; color:white; }\n  .nav .logo { font-weight:bold; font-size:1.2rem; }\n  .nav .links { display:flex; gap:1rem; }\n  .nav .links a { color:white; text-decoration:none; }\n  .nav .cta { background:#6c63ff; border:none; color:white; padding:0.5rem 1rem; border-radius:6px; cursor:pointer; }\n</style>\n<nav class="nav">\n  <div class="logo">MyApp</div>\n  <div class="links"><a href="#">Home</a><a href="#">About</a><a href="#">Blog</a></div>\n  <button class="cta">Sign Up</button>\n</nav>`,
+    explanation:`📌 justify-content: space-between pushes first and last items to edges.\n📌 align-items: center vertically centers all items in the nav.\n📌 Nested flex (links div) is also a flex container for the links.\n📌 This is the most common navbar pattern used on modern websites.`,
+    hints:['justify-content:space-between spreads items','align-items:center for vertical centering','Nested flex containers work great'],
+    validate:c=>['space-between','align-items'].every(t=>c.includes(t))
+  },
+  { id:'ci-2', title:'Card Component', difficulty:'Medium', description:'Build a styled card component with image, title, description, and button using modern CSS.',
+    concepts:['border-radius','box-shadow','overflow'],
+    starterCode:`<style>\n  .card {\n    width: 300px;\n    background: #1a1a2e;\n    color: white;\n    /* Add: border-radius, overflow hidden, box-shadow */\n  }\n  .card img { width:100%; height:180px; /* make image cover */ }\n  .card .body { /* add padding */ }\n  .card h3 { margin-bottom: 0.5rem; }\n  .card p { color: #a0a0c0; font-size: 0.9rem; margin-bottom: 1rem; }\n  .card .btn { display:inline-block; background:#6c63ff; color:white; padding:0.5rem 1.5rem; border-radius:6px; text-decoration:none; }\n</style>\n<div class="card">\n  <img src="https://picsum.photos/300/180" alt="Card">\n  <div class="body">\n    <h3>Card Title</h3>\n    <p>This is a beautiful card component.</p>\n    <a href="#" class="btn">Learn More</a>\n  </div>\n</div>`,
+    solution:`<style>\n  .card {\n    width: 300px;\n    background: #1a1a2e;\n    color: white;\n    border-radius: 12px;\n    overflow: hidden;\n    box-shadow: 0 4px 20px rgba(0,0,0,0.3);\n  }\n  .card img { width:100%; height:180px; object-fit:cover; }\n  .card .body { padding: 1.5rem; }\n  .card h3 { margin-bottom: 0.5rem; }\n  .card p { color: #a0a0c0; font-size: 0.9rem; margin-bottom: 1rem; }\n  .card .btn { display:inline-block; background:#6c63ff; color:white; padding:0.5rem 1.5rem; border-radius:6px; text-decoration:none; }\n</style>\n<div class="card">\n  <img src="https://picsum.photos/300/180" alt="Card">\n  <div class="body">\n    <h3>Card Title</h3>\n    <p>This is a beautiful card component.</p>\n    <a href="#" class="btn">Learn More</a>\n  </div>\n</div>`,
+    explanation:`📌 overflow: hidden clips the image corners to match the card's border-radius.\n📌 object-fit: cover makes the image fill the area without distortion.\n📌 box-shadow adds depth — rgba for semi-transparent shadow.\n📌 Cards are the most common UI pattern on the web (social media, e-commerce, etc).`,
+    hints:['overflow:hidden clips children to border-radius','object-fit:cover fills without stretching','box-shadow adds depth'],
+    validate:c=>['border-radius','overflow','box-shadow'].every(t=>c.includes(t))
+  },
+  { id:'ci-3', title:'CSS Transitions', difficulty:'Medium', description:'Add smooth transitions to multiple properties: background, transform, and box-shadow on hover.',
+    concepts:['transition','transform','box-shadow'],
+    starterCode:`<style>\n  .box {\n    width:200px; height:200px; background:#6c63ff; border-radius:12px;\n    display:flex; align-items:center; justify-content:center;\n    color:white; font-weight:bold; font-size:1.2rem; cursor:pointer;\n    /* Add transition */\n  }\n  .box:hover {\n    /* Change bg, scale up, add shadow */\n  }\n</style>\n<div class="box">Hover Me</div>`,
+    solution:`<style>\n  .box {\n    width:200px; height:200px; background:#6c63ff; border-radius:12px;\n    display:flex; align-items:center; justify-content:center;\n    color:white; font-weight:bold; font-size:1.2rem; cursor:pointer;\n    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);\n  }\n  .box:hover {\n    background: #8b5cf6;\n    transform: scale(1.1) rotate(5deg);\n    box-shadow: 0 15px 40px rgba(108,99,255,0.4);\n  }\n</style>\n<div class="box">Hover Me</div>`,
+    explanation:`📌 transition: all 0.4s animates ANY property that changes.\n📌 cubic-bezier(0.4, 0, 0.2, 1) is an easing curve — starts slow, ends fast.\n📌 transform: scale(1.1) rotate(5deg) combines multiple transforms.\n📌 rgba shadow with alpha creates a colored glow effect.`,
+    hints:['transition on the base state, changes in :hover','cubic-bezier creates smooth easing','You can combine scale + rotate in one transform'],
+    validate:c=>['transition','transform','box-shadow'].every(t=>c.includes(t))
+  },
+  { id:'ci-4', title:'Media Queries', difficulty:'Medium', description:'Make a 3-column layout responsive: 3 cols on desktop, 2 on tablet, 1 on mobile using media queries.',
+    concepts:['@media','breakpoints','mobile-first'],
+    starterCode:`<style>\n  .grid { display:grid; grid-template-columns:1fr; gap:1rem; padding:1rem; }\n  .item { background:#6c63ff; color:white; padding:2rem; border-radius:8px; text-align:center; }\n  /* Add @media for tablet (768px) → 2 cols, desktop (1024px) → 3 cols */\n</style>\n<div class="grid">\n  <div class="item">1</div><div class="item">2</div><div class="item">3</div>\n  <div class="item">4</div><div class="item">5</div><div class="item">6</div>\n</div>`,
+    solution:`<style>\n  .grid { display:grid; grid-template-columns:1fr; gap:1rem; padding:1rem; }\n  .item { background:#6c63ff; color:white; padding:2rem; border-radius:8px; text-align:center; }\n  @media (min-width: 768px) {\n    .grid { grid-template-columns: 1fr 1fr; }\n  }\n  @media (min-width: 1024px) {\n    .grid { grid-template-columns: 1fr 1fr 1fr; }\n  }\n</style>\n<div class="grid">\n  <div class="item">1</div><div class="item">2</div><div class="item">3</div>\n  <div class="item">4</div><div class="item">5</div><div class="item">6</div>\n</div>`,
+    explanation:`📌 Mobile-first: start with 1 column, ADD more columns for bigger screens.\n📌 @media (min-width: 768px) targets tablets and above.\n📌 @media (min-width: 1024px) targets desktops and above.\n📌 This is the standard responsive pattern used by every modern website.`,
+    hints:['Start with 1 column (mobile-first)','768px is the standard tablet breakpoint','1024px is the standard desktop breakpoint'],
+    validate:c=>['@media','min-width: 768px','min-width: 1024px'].every(t=>c.includes(t))
+  },
+  { id:'ci-5', title:'Pseudo-elements', difficulty:'Medium', description:'Use ::before and ::after to add decorative elements without extra HTML — like custom bullets and underlines.',
+    concepts:['::before','::after','content'],
+    starterCode:`<style>\n  .fancy { position:relative; font-size:2rem; color:#6c63ff; font-weight:bold; display:inline-block; padding-bottom:8px; }\n  /* Add ::after as an underline bar below the text */\n  /* Add ::before as a decorative emoji */\n</style>\n<h1 class="fancy">Hello World</h1>`,
+    solution:`<style>\n  .fancy { position:relative; font-size:2rem; color:#6c63ff; font-weight:bold; display:inline-block; padding-bottom:8px; }\n  .fancy::before { content: "🚀 "; }\n  .fancy::after {\n    content: "";\n    position: absolute;\n    bottom: 0; left: 0;\n    width: 100%; height: 4px;\n    background: linear-gradient(90deg, #6c63ff, #8b5cf6);\n    border-radius: 2px;\n  }\n</style>\n<h1 class="fancy">Hello World</h1>`,
+    explanation:`📌 ::before inserts content BEFORE the element's text.\n📌 ::after inserts content AFTER — perfect for decorative lines/shapes.\n📌 content: "" is REQUIRED even if empty (for visual-only pseudo-elements).\n📌 Position absolute on ::after lets you place it precisely relative to the parent.`,
+    hints:['content is required for pseudo-elements','position:absolute + parent relative for precise placement','Use for decorations without extra HTML'],
+    validate:c=>['::before','::after','content'].every(t=>c.includes(t))
+  },
+  { id:'ci-6', title:'Glassmorphism', difficulty:'Medium', description:'Create the trendy frosted glass effect using backdrop-filter, transparency, and subtle borders.',
+    concepts:['backdrop-filter','rgba','blur'],
+    starterCode:`<style>\n  body { min-height:100vh; display:flex; align-items:center; justify-content:center;\n    background:linear-gradient(135deg,#667eea,#764ba2); font-family:sans-serif; }\n  .glass {\n    width:350px; padding:2rem;\n    /* Add: semi-transparent bg, backdrop-filter blur, border, radius, shadow */\n  }\n  .glass h2 { color:white; } .glass p { color:rgba(255,255,255,0.8); }\n</style>\n<div class="glass"><h2>Glass Card</h2><p>Frosted glass effect!</p></div>`,
+    solution:`<style>\n  body { min-height:100vh; display:flex; align-items:center; justify-content:center;\n    background:linear-gradient(135deg,#667eea,#764ba2); font-family:sans-serif; }\n  .glass {\n    width:350px; padding:2rem;\n    background: rgba(255,255,255,0.15);\n    backdrop-filter: blur(12px);\n    border-radius: 16px;\n    border: 1px solid rgba(255,255,255,0.2);\n    box-shadow: 0 8px 32px rgba(0,0,0,0.2);\n  }\n  .glass h2 { color:white; } .glass p { color:rgba(255,255,255,0.8); }\n</style>\n<div class="glass"><h2>Glass Card</h2><p>Frosted glass effect!</p></div>`,
+    explanation:`📌 rgba(255,255,255,0.15) = white at 15% opacity — lets the background show through.\n📌 backdrop-filter: blur(12px) blurs whatever is BEHIND the element.\n📌 The combination creates a frosted glass look.\n📌 Add a subtle border with rgba for the glass "edge" effect.`,
+    hints:['rgba for semi-transparent background','backdrop-filter: blur() for frosted effect','Subtle border adds the glass edge'],
+    validate:c=>['backdrop-filter','blur','rgba'].every(t=>c.includes(t))
+  }
+];
+
+export const jsIntermediate = [
+  { id:'ji-1', title:'Arrow Functions', difficulty:'Medium', description:'Convert regular functions to arrow functions — shorter syntax for modern JavaScript.',
+    concepts:['Arrow =>','Implicit return','this context'],
+    starterCode:`// Convert these to arrow functions:\n\n// 1. Regular function\nconst double = function(n) {\n  return n * 2;\n}\n\n// 2. Make it a one-liner arrow\nconst triple = \n\n// 3. Arrow with array method\nconst nums = [1,2,3,4,5];\nconst squared = \n\nconsole.log(double(5));\nconsole.log(triple(5));\nconsole.log("Squared:", squared);`,
+    solution:`const double = (n) => n * 2;\n\nconst triple = n => n * 3;\n\nconst nums = [1,2,3,4,5];\nconst squared = nums.map(n => n * n);\n\nconsole.log(double(5));\nconsole.log(triple(5));\nconsole.log("Squared:", squared);`,
+    explanation:`📌 Arrow syntax: (params) => expression — shorter than function keyword.\n📌 Single param doesn't need parentheses: n => n * 2.\n📌 Single expression doesn't need { } or return — it's "implicit return".\n📌 Arrow functions are used everywhere with .map(), .filter(), .forEach() etc.`,
+    hints:['(param) => expression is the basic arrow syntax','Single param: n => n*2 (no parentheses needed)','Single expression = implicit return (no { } or return)'],
+    validate:c=>c.includes('=>')&&c.includes('.map(')
+  },
+  { id:'ji-2', title:'Array Methods', difficulty:'Medium', description:'Use map, filter, and reduce — the 3 most important array methods in JavaScript.',
+    concepts:['map()','filter()','reduce()'],
+    starterCode:`const prices = [29, 99, 15, 250, 75, 120, 45];\n\n// 1. filter: get prices over 50\nconst expensive = \n\n// 2. map: add 10% tax to expensive items\nconst withTax = \n\n// 3. reduce: get total\nconst total = \n\nconsole.log("Expensive:", expensive);\nconsole.log("With Tax:", withTax);\nconsole.log("Total:", total.toFixed(2));`,
+    solution:`const prices = [29, 99, 15, 250, 75, 120, 45];\n\nconst expensive = prices.filter(p => p > 50);\nconst withTax = expensive.map(p => p * 1.1);\nconst total = withTax.reduce((sum, p) => sum + p, 0);\n\nconsole.log("Expensive:", expensive);\nconsole.log("With Tax:", withTax);\nconsole.log("Total:", total.toFixed(2));`,
+    explanation:`📌 .filter(fn) keeps items where fn returns true — like a sieve.\n📌 .map(fn) transforms each item — returns a NEW array.\n📌 .reduce(fn, start) accumulates all items into one value (sum, count, etc).\n📌 These 3 methods replace 90% of for loops in modern JS!`,
+    hints:['.filter(p => p > 50) keeps items matching condition','.map(p => p * 1.1) transforms each item','.reduce((sum, p) => sum + p, 0) adds them up'],
+    validate:c=>['.filter(','.map(','.reduce('].every(t=>c.includes(t))
+  },
+  { id:'ji-3', title:'Destructuring', difficulty:'Medium', description:'Extract values from objects and arrays in one line using destructuring — cleaner, modern syntax.',
+    concepts:['Object Destructuring','Array Destructuring','Defaults'],
+    starterCode:`const user = { name:"Dev", age:21, city:"Mumbai", skills:["HTML","CSS"] };\n\n// 1. Destructure name and city from user\n\n// 2. Destructure first skill from skills array\nconst [firstSkill] = \n\n// 3. Create copy of user with age changed to 22 using spread\nconst updated = \n\nconsole.log(name, city);\nconsole.log("First skill:", firstSkill);\nconsole.log("Updated:", updated);`,
+    solution:`const user = { name:"Dev", age:21, city:"Mumbai", skills:["HTML","CSS"] };\n\nconst { name, city } = user;\n\nconst [firstSkill] = user.skills;\n\nconst updated = { ...user, age: 22 };\n\nconsole.log(name, city);\nconsole.log("First skill:", firstSkill);\nconsole.log("Updated:", updated);`,
+    explanation:`📌 const { name, city } = obj extracts properties into variables.\n📌 const [first] = array extracts the first item.\n📌 { ...user, age: 22 } copies everything + overrides age.\n📌 Spread (...) creates a shallow copy — the original is NOT changed.`,
+    hints:['const { key } = object extracts properties','const [item] = array extracts by position','...spread copies + lets you override'],
+    validate:c=>c.includes('const {')&&c.includes('...')
+  },
+  { id:'ji-4', title:'Fetch API', difficulty:'Medium', description:'Use fetch + async/await to load data from an API and display it.',
+    concepts:['fetch','async/await','JSON'],
+    starterCode:`// Fetch user data from: https://jsonplaceholder.typicode.com/users/1\n// Print their name, email, and city\n\nasync function getUser() {\n  // Your code here\n}\n\ngetUser();`,
+    solution:`async function getUser() {\n  try {\n    const res = await fetch("https://jsonplaceholder.typicode.com/users/1");\n    const user = await res.json();\n    console.log("Name:", user.name);\n    console.log("Email:", user.email);\n    console.log("City:", user.address.city);\n  } catch(err) {\n    console.log("Error:", err.message);\n  }\n}\n\ngetUser();`,
+    explanation:`📌 fetch(url) sends a network request and returns a Promise.\n📌 await pauses until the Promise resolves (only works inside async functions).\n📌 .json() parses the response body as JSON.\n📌 try/catch handles errors (network failures, bad URLs, etc).`,
+    hints:['await fetch(url) returns a Response','await res.json() parses the JSON body','Wrap in try/catch for error handling'],
+    validate:c=>['fetch','await','async','.json()'].every(t=>c.includes(t))
+  },
+  { id:'ji-5', title:'Template Literals', difficulty:'Medium', description:'Use backtick strings for interpolation, multi-line strings, and building HTML dynamically.',
+    concepts:['Template Literals','${interpolation}','Tagged templates'],
+    starterCode:`const name = "Dev";\nconst skills = ["HTML", "CSS", "JS"];\n\n// 1. Create greeting with template literal\nconst greeting = \n\n// 2. Build an HTML card string with skills list\nconst card = \n\nconsole.log(greeting);\nconsole.log(card);`,
+    solution:"const name = \"Dev\";\nconst skills = [\"HTML\", \"CSS\", \"JS\"];\n\nconst greeting = `Welcome, ${name}! You know ${skills.length} skills.`;\n\nconst card = `\n<div class=\"card\">\n  <h2>${name}</h2>\n  <ul>\n    ${skills.map(s => `<li>${s}</li>`).join('')}\n  </ul>\n</div>`;\n\nconsole.log(greeting);\nconsole.log(card);",
+    explanation:`📌 Backticks \` \` allow multi-line strings and \${expression} interpolation.\n📌 \${variable} inserts the value directly — no + concatenation needed.\n📌 You can put ANY expression inside \${ }: function calls, math, ternaries.\n📌 .map() + template literals is perfect for generating HTML lists dynamically.`,
+    hints:['Use backticks instead of quotes','${expression} inserts values','Great for building HTML strings dynamically'],
+    validate:c=>c.includes('`')&&c.includes('${')
+  },
+  { id:'ji-6', title:'Event Delegation', difficulty:'Medium', description:'Instead of adding listeners to every button, add ONE listener to the parent and use event.target to handle clicks.',
+    concepts:['Event Delegation','event.target','dataset'],
+    starterCode:`// Add ONE click listener to the container that handles all button clicks\nconst container = document.querySelector('.buttons');\n\n// Your listener here — use e.target to detect which button was clicked\n`,
+    html:`<div class="buttons">\n  <button data-color="red">Red</button>\n  <button data-color="blue">Blue</button>\n  <button data-color="green">Green</button>\n</div>\n<p id="result">Click a button!</p>`,
+    solution:`const container = document.querySelector('.buttons');\n\ncontainer.addEventListener('click', (e) => {\n  if (e.target.tagName === 'BUTTON') {\n    const color = e.target.dataset.color;\n    document.getElementById('result').textContent = 'You picked: ' + color;\n    document.getElementById('result').style.color = color;\n    console.log('Clicked:', color);\n  }\n});`,
+    explanation:`📌 Event delegation: ONE listener on parent instead of one per child.\n📌 Events "bubble up" — clicking a button fires the event on its parent too.\n📌 e.target is the actual element that was clicked.\n📌 data-color attribute is accessed via element.dataset.color in JS.`,
+    hints:['Add listener to the parent container','e.target tells you which child was clicked','data-* attributes are accessed via .dataset'],
+    validate:c=>['addEventListener','target','dataset'].every(t=>c.includes(t))
+  }
+];

@@ -144,6 +144,38 @@ body {
 }
 
 /* Module Tabs */
+.level-selector {
+  display: flex;
+  gap: 4px;
+  padding: 0.75rem 1rem 0;
+}
+
+.level-btn {
+  flex: 1;
+  padding: 0.4rem 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.level-btn:hover {
+  background: var(--bg-card);
+  border-color: var(--border-active);
+}
+
+.level-btn.active {
+  color: white;
+  border-color: transparent;
+  box-shadow: var(--shadow-glow);
+}
+
 .module-tabs {
   display: flex;
   gap: 4px;

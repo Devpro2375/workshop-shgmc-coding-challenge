@@ -1,9 +1,13 @@
 import React from 'react';
 
-export default function Sidebar({ modules, activeModule, setActiveModule, activeChallenge, setActiveChallenge, completedChallenges }) {
+const levelConfig = {
+  beginner: { label: '🌱 Beginner', color: '#10b981' },
+  intermediate: { label: '🔥 Intermediate', color: '#f59e0b' },
+  advanced: { label: '🚀 Advanced', color: '#ef4444' }
+};
+
+export default function Sidebar({ modules, activeModule, setActiveModule, activeChallenge, setActiveChallenge, completedChallenges, activeLevel, setActiveLevel }) {
   const currentModule = modules.find(m => m.id === activeModule);
-  const completed = completedChallenges.filter(c => c.startsWith(activeModule)).length;
-  const total = currentModule?.challenges.length || 0;
   const totalAll = modules.reduce((s, m) => s + m.challenges.length, 0);
   const completedAll = completedChallenges.length;
 
@@ -17,6 +21,20 @@ export default function Sidebar({ modules, activeModule, setActiveModule, active
             <span>Learn What Matters</span>
           </h1>
         </div>
+      </div>
+
+      {/* Level Selector */}
+      <div className="level-selector">
+        {Object.entries(levelConfig).map(([key, { label, color }]) => (
+          <button
+            key={key}
+            className={`level-btn ${activeLevel === key ? 'active' : ''}`}
+            onClick={() => setActiveLevel(key)}
+            style={activeLevel === key ? { background: color, borderColor: color } : {}}
+          >
+            {label}
+          </button>
+        ))}
       </div>
 
       <div className="module-tabs">

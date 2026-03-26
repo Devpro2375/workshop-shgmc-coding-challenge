@@ -248,8 +248,26 @@ const jsChallenges = [
   }
 ];
 
-export const modules = [
-  { id: 'html', name: 'HTML', icon: '🏗️', color: '#e44d26', challenges: htmlChallenges },
-  { id: 'css', name: 'CSS', icon: '🎨', color: '#264de4', challenges: cssChallenges },
-  { id: 'js', name: 'JavaScript', icon: '⚡', color: '#f7df1e', challenges: jsChallenges }
-];
+import { htmlIntermediate, cssIntermediate, jsIntermediate } from './intermediate';
+import { htmlAdvanced, cssAdvanced, jsAdvanced } from './advanced';
+
+export const levels = {
+  beginner: [
+    { id: 'html', name: 'HTML', icon: '🏗️', color: '#e44d26', challenges: htmlChallenges },
+    { id: 'css', name: 'CSS', icon: '🎨', color: '#264de4', challenges: cssChallenges },
+    { id: 'js', name: 'JavaScript', icon: '⚡', color: '#f7df1e', challenges: jsChallenges }
+  ],
+  intermediate: [
+    { id: 'html', name: 'HTML', icon: '🏗️', color: '#e44d26', challenges: htmlIntermediate },
+    { id: 'css', name: 'CSS', icon: '🎨', color: '#264de4', challenges: cssIntermediate },
+    { id: 'js', name: 'JavaScript', icon: '⚡', color: '#f7df1e', challenges: jsIntermediate }
+  ],
+  advanced: [
+    { id: 'html', name: 'HTML', icon: '🏗️', color: '#e44d26', challenges: htmlAdvanced },
+    { id: 'css', name: 'CSS', icon: '🎨', color: '#264de4', challenges: cssAdvanced },
+    { id: 'js', name: 'JavaScript', icon: '⚡', color: '#f7df1e', challenges: jsAdvanced }
+  ]
+};
+
+// Keep backward compat
+export const modules = levels.beginner;
